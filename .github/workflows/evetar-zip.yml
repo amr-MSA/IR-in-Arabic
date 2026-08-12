@@ -1,0 +1,26 @@
+name: Zip EveTAR
+
+on:
+  workflow_dispatch:
+
+jobs:
+  zip-evetar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Create EveTAR ZIP
+        run: |
+          cd Summer2021/data
+          zip -r ../../EveTAR.zip EveTAR
+
+      - name: Upload EveTAR ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: EveTAR
+          path: EveTAR.zip
+          retention-days: 7
